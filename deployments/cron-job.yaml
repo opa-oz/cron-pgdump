@@ -16,3 +16,5 @@ spec:
               image: cr.yandex/crpoghn06qpit3061gka/cron-pgdump:0.1.3-amd64
               imagePullPolicy: IfNotPresent
           restartPolicy: OnFailure
+          imagePullSecrets:
+            - name: yandex

@@ -13,7 +13,6 @@ DB_LIST = [
     "gitea",
     "healthcheck",
     "mal_database",
-    "n8n",
     "paperless",
     "shikimori",
     "smbc",

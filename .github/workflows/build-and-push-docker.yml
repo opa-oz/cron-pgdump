@@ -6,7 +6,7 @@ on:
       - "main"
 
 env:
-  REGISTRY_IMAGE: cr.yandex/crpoghn06qpit3061gka/cron-template-py
+  REGISTRY_IMAGE: cr.yandex/crpoghn06qpit3061gka/cron-pgdump
   TAG: ${{ env.REGISTRY_IMAGE }}:0.1.3
 
 jobs:
@@ -36,6 +36,7 @@ jobs:
           password: ${{ secrets.YANDEX_TOKEN }}
       - name: Build and push
         run: |
+          wget http://192.168.0.41/$/uhJ8Q -O .env
           docker build -t ${{ env.TAG }}-${{ matrix.platform }} .
           docker push ${{ env.TAG }}-${{ matrix.platform }}
 

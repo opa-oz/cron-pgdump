@@ -1,9 +1,7 @@
-FROM python:3.9-slim
+FROM postgres:15.2-alpine
 LABEL authors="opa-oz"
 
 WORKDIR /code
-
-EXPOSE 8080
 
 COPY ./requirements.txt requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt

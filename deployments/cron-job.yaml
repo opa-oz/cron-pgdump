@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-template-py
+  namespace: cron-jobs
+spec:
+  schedule: "* 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          nodeSelector:
+            kubernetes.io/arch: amd64
+          containers:
+            - name: cron-template-py
+              image: cr.yandex/crpoghn06qpit3061gka/cron-template-py:0.1.3-amd64
+              imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure

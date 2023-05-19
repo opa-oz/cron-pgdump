@@ -41,6 +41,8 @@ def backup():
 
             prefix = os.environ["FILE_PREFIX"]
             client.upload_file(target_file, os.environ["BUCKET_NAME"], f"{prefix}/{db}")
+            if os.path.exists(target_file):
+                os.remove(target_file)
     except Exception as e:
         print("Error:", e)
         requests.get(os.environ["ERROR"])

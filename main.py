@@ -6,22 +6,11 @@ import requests
 from dotenv import load_dotenv
 from pathlib import Path
 
-load_dotenv()
-
-DB_LIST = [
-    "covers",
-    "gitea",
-    "healthcheck",
-    "mal_database",
-    "paperless",
-    "shikimori",
-    "smbc",
-    "spotify",
-    "yandex",
-]
-
 
 def backup():
+    load_dotenv()
+
+    DB_LIST = os.environ["DB_LIST"].split(',')
     pg_string = os.environ["PG_CONNECTION_STRING"]
 
     client = boto3.client(
@@ -44,10 +33,23 @@ def backup():
                 os.remove(target_file)
     except Exception as e:
         print("Error:", e)
-        requests.get(os.environ["ERROR"])
+
+        error_urls = os.environ["ERROR"].split(',')
+
+        for url in error_urls:
+            try:
+                requests.get(url)
+            except:
+                pass
         return
 
-    requests.get(os.environ["SUCCESS"])
+    success_urls = os.environ["SUCCESS"].split(',')
+
+    for url in success_urls:
+        try:
+            requests.get(url)
+        except:
+            pass
     print("Finish")
 
 
